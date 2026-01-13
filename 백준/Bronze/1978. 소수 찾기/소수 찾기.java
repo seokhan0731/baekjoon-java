@@ -4,6 +4,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
+/**
+ * 리팩토링 코드
+ * 1. 약수의 대칭성 이용 -> 소수가 아닌 경우, a*b(a<=b)꼴로 숫자가 표현되는데, 이때 a의 범위는 1<=a<=sqrt(number)
+ * =>기존 처음부터 주어진 숫자까지 설정했던 범위를 sqrt(number)와 동일하게 설정
+ * <p>
+ * 2. 불필요한 배열 제거
+ * => 각 요소에 대한 독립적인 판단을 통해 개수를 구하기 때문에, 입력과 동시에 로직을 수행하면 불필요한 배열 필요 X
+ */
 public class Main {
     static boolean isDecimal(int number) {
         int i = 2;
