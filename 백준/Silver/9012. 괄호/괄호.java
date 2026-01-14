@@ -2,27 +2,23 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.StringTokenizer;
 
 public class Main {
 
-    static boolean isVPS(String PS) {
+    static boolean isVps(String ps) {
         int count = 0;
-        for (int i = 0; i < PS.length(); i++) {
-            if (PS.charAt(i) == '(') {
+        for (int i = 0; i < ps.length(); i++) {
+            if (ps.charAt(i) == '(') {
                 count++;
-            } else {
-                count--;
+                continue;
             }
 
+            count--;
             if (count < 0) {
                 return false;
             }
         }
-        if (count != 0) {
-            return false;
-        }
-        return true;
+        return count == 0;
     }
 
     public static void main(String[] args) throws IOException {
@@ -32,12 +28,8 @@ public class Main {
         int n = Integer.parseInt(br.readLine());
 
         for (int i = 0; i < n; i++) {
-            String PS = br.readLine();
-            if (isVPS(PS)) {
-                sb.append("YES\n");
-                continue;
-            }
-            sb.append("NO\n");
+            String ps = br.readLine();
+            sb.append(isVps(ps) ? "YES\n" : "NO\n");
         }
 
         System.out.println(sb);
