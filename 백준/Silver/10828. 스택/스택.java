@@ -6,39 +6,46 @@ import java.util.*;
 
 public class Main {
     static StringBuilder sb = new StringBuilder();
+    static int size = 0;
 
-    static void controlStack(Stack<Integer> stack, String command) {
+    static void controlStack(int[] stack, String command) {
+
         if (command.contains("push")) {
             StringTokenizer st = new StringTokenizer(command);
             st.nextToken();
-            Integer pushedNumber = Integer.parseInt(st.nextToken());
-            stack.push(pushedNumber);
+            int pushedNumber = Integer.parseInt(st.nextToken());
+            stack[size] = pushedNumber;
+            size++;
         }
         if (command.equals("pop")) {
-            if (!stack.empty()) {
-                Integer popedNumber = stack.pop();
+            if (size != 0) {
+                Integer popedNumber = stack[size - 1];
                 sb.append(popedNumber);
-            } else {
+                size--;
+            }
+            else {
                 sb.append(-1);
             }
             sb.append('\n');
         }
         if (command.equals("size")) {
-            sb.append(stack.size()).append('\n');
+            sb.append(size).append('\n');
         }
         if (command.equals("empty")) {
-            if (!stack.empty()) {
+            if (size != 0) {
                 sb.append(0);
-            } else {
+            }
+            else {
                 sb.append(1);
             }
             sb.append('\n');
         }
         if (command.equals("top")) {
-            if (!stack.empty()) {
-                Integer topNumber = stack.peek();
+            if (size != 0) {
+                Integer topNumber = stack[size - 1];
                 sb.append(topNumber);
-            } else {
+            }
+            else {
                 sb.append(-1);
             }
             sb.append('\n');
@@ -51,13 +58,11 @@ public class Main {
 
         int n = Integer.parseInt(br.readLine());
 
-        Stack<Integer> stack = new Stack<>();
-
+        int[] stack = new int[n];
         for (int i = 0; i < n; i++) {
             String command = br.readLine();
             controlStack(stack, command);
         }
-        
         System.out.println(sb);
     }
 }
